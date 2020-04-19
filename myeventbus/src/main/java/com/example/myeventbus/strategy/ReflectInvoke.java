@@ -27,6 +27,7 @@ public class ReflectInvoke extends MethodInvokeStrategy {
         //CopyOnWriteArrayList<Subscription> subscribedMethods = new CopyOnWriteArrayList<Subscription>();
         List<SubscribedMethod> subscribedMethods = new ArrayList<>();
         Class<?> aClass = subscriber.getClass();
+        //获取所有方法
         Method[] declaredMethods = aClass.getDeclaredMethods();
         for (Method declaredMethod : declaredMethods) {
             if (declaredMethod.isAnnotationPresent(Subscribe.class)) {

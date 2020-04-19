@@ -84,6 +84,11 @@ public class MyEventBus {
         }
     }
 
+    /**
+     * 发送event消息到订阅者 处理方法
+     *
+     * @param event
+     */
     public void post(Object event) {
         if (subscriptionsByEventType.size() <= 0) {
             Log.e(TAG, "post: no any eventbus registed named" + event.toString());
@@ -95,6 +100,14 @@ public class MyEventBus {
         }
     }
 
-
-
+    /**
+     * 解注册eventbus
+     *
+     * @param subscriber
+     */
+    public void unregister(Object subscriber) {
+        if (typesBySubscriber != null) {
+            typesBySubscriber.remove(subscriber);
+        }
+    }
 }
