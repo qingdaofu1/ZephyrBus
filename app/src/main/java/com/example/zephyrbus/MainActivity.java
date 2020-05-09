@@ -1,7 +1,5 @@
 package com.example.zephyrbus;
 
-import androidx.annotation.MainThread;
-import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -9,9 +7,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.annotations.Subscribe;
+import com.example.annotations.ThreadMode;
 import com.example.myeventbus.MyEventBus;
-import com.example.myeventbus.Subscribe;
-import com.example.myeventbus.ThreadMode;
+import com.example.myeventbus.MyEventBusBuilder;
+import com.example.myeventbus.strategy.AptAnnotationInvoke;
 import com.example.zephyrbus.Event.ViewEvent;
 import com.example.zephyrbus.Event.WorkEvent;
 
@@ -71,7 +71,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        MyEventBus.getDefault().register(this);
+        long startTime = System.currentTimeMillis();
+        Log.d(TAG, "onStart: startTime=" + startTime);
+
+        //反射调用方式
+        //MyEventBus.getDefault().register(this);
+        AptMethodFinder aptMethodFinder = new AptMethodFinder();
+        //注解处理器代码的模板类
+//        AptMethodFinderTemplate aptMethodFinder = new AptMethodFinderTemplate();
+        //注解处理调用方式
+        MyEventBus.builder().setMethodHandle(aptMethodFinder).build().register(this);
+        long endTime = System.currentTimeMillis();
+        Log.d(TAG, "onStart: endTime=" + endTime);
+        Log.d(TAG, "onStart: collect all subscribe method cost " + (endTime - startTime));
     }
 
     @Override

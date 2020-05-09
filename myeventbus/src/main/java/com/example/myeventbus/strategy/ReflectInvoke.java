@@ -2,10 +2,10 @@ package com.example.myeventbus.strategy;
 
 import android.util.Log;
 
-import com.example.myeventbus.Subscribe;
-import com.example.myeventbus.ThreadMode;
-import com.example.myeventbus.bean.SubscribedMethod;
-import com.example.myeventbus.bean.Subscription;
+import com.example.annotations.Subscribe;
+import com.example.annotations.SubscribedMethod;
+import com.example.annotations.Subscription;
+import com.example.annotations.ThreadMode;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -53,7 +53,7 @@ public class ReflectInvoke extends MethodInvokeStrategy {
         final Object subscriber = subscription.getSubscriber();
         SubscribedMethod subscribedMethod = subscription.getSubscribedMethod();
         final Method method = subscribedMethod.getMethod();
-        switch (subscribedMethod.getThreadMode()){
+        switch (subscribedMethod.getThreadMode()) {
             case POSTING:
                 Log.d(TAG, "invokeMethod: ThreadMode=POSTING");
                 invoke(method, subscriber, event);
@@ -80,7 +80,7 @@ public class ReflectInvoke extends MethodInvokeStrategy {
 
     }
 
-    private void invoke(Method method, Object subscriber, Object event){
+    private void invoke(Method method, Object subscriber, Object event) {
         try {
             method.invoke(subscriber, event);
         } catch (IllegalAccessException e) {

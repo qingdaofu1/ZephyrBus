@@ -1,2 +1,2 @@
-include ':app', ':myeventbus'
+include ':app', ':myeventbus', ':annotations', ':apt_processor'
 rootProject.name='ZephyrBus'

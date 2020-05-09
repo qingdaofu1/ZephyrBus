@@ -4,12 +4,9 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 
-import com.example.myeventbus.bean.SubscribedMethod;
-import com.example.myeventbus.bean.Subscription;
+import com.example.annotations.MethodHandle;
 
-import java.util.List;
-
-public abstract class MethodInvokeStrategy {
+public abstract class MethodInvokeStrategy implements MethodHandle {
     private static final String TAG = "MethodInvokeStrategy";
 
     private static HandlerThread handlerThread = new HandlerThread("workThread");
@@ -23,14 +20,4 @@ public abstract class MethodInvokeStrategy {
         mainHandler = new Handler(Looper.getMainLooper());
         workHander = new Handler(handlerThread.getLooper());
     }
-
-    public List<SubscribedMethod> getAllSubscribedMethods(Object subscriber) {
-        return null;
-    }
-
-    public void invokeMethod(Subscription subscription, Object event) {
-
-    }
-
-
 }

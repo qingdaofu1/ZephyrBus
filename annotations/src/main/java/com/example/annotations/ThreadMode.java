@@ -1,4 +1,4 @@
-package com.example.myeventbus;
+package com.example.annotations;
 
 public enum ThreadMode {
     POSTING,

@@ -1,6 +1,5 @@
-package com.example.myeventbus.bean;
+package com.example.annotations;
 
-import com.example.myeventbus.ThreadMode;
 
 import java.lang.reflect.Method;
 
@@ -9,12 +8,22 @@ public class SubscribedMethod {
     private Class<?> eventType;
     private ThreadMode threadMode;
     private int priority;
+    private String methodName;
+    private Class<?> subscriberClass;
 
     public SubscribedMethod(Method method, Class<?> eventType, ThreadMode threadMode, int priority) {
         this.method = method;
         this.eventType = eventType;
         this.threadMode = threadMode;
         this.priority = priority;
+    }
+
+    public SubscribedMethod(Class<?> subscriberClass, Class<?> eventType, ThreadMode threadMode, int priority, String methodName) {
+        this.subscriberClass = subscriberClass;
+        this.eventType = eventType;
+        this.threadMode = threadMode;
+        this.priority = priority;
+        this.methodName = methodName;
     }
 
     public Method getMethod() {
@@ -31,6 +40,14 @@ public class SubscribedMethod {
 
     public int getPriority() {
         return priority;
+    }
+
+    public String getMethodName() {
+        return methodName;
+    }
+
+    public Class<?> getSubscriberClass() {
+        return subscriberClass;
     }
 
     @Override

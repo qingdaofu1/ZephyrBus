@@ -1,4 +1,4 @@
-package com.example.myeventbus.bean;
+package com.example.annotations;
 
 /**
  * 保存  注册了订阅者的类即有register的类和加了注解Subscribe的方法的java类
@@ -20,5 +20,13 @@ public class Subscription {
 
     public SubscribedMethod getSubscribedMethod() {
         return subscribedMethod;
+    }
+
+    @Override
+    public String toString() {
+        return "Subscription{" +
+                "subscriber=" + subscriber +
+                ", subscribedMethod=" + subscribedMethod +
+                '}';
     }
 }
